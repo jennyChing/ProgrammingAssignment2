@@ -1,18 +1,25 @@
 ## Put comments here that give an overall description of what your
 ## functions do
 
-## Write a short comment describing this function
+## this function stores the inverse of the matrix x, taking x as input
 
 makeCacheMatrix <- function(x = matrix()) {
-        
-        m <- NULL
+        ## store the value of matrix inverse as NULL
+        martrixInverse <- NULL
+        ## define new function to set matrix x to a new matrix y and reset the matrix to NULL
         set <- function(y) {
+                ## Create matrix for the first time
                 x <<- y
-                m <<- NULL
+                ## Reset the inverse matrix value in case the matrix is changed
+                martrixInverse <<- NULL
         }
+        ## new function get the value of the matrix x
         get <- function() x
-        setinverse <- function(solve) m <<- solve
-        getinverse <- function() m
+        ## calculate the inverse of matrix x with solve function
+        setinverse <- function(solve) martrixInverse <<- solve
+        ## get the inverse value
+        getinverse <- function() martrixInverse
+        ## pass the value within the function makeCacheMatrix
         list(set = set, get = get,
             setinverse = setinverse,
             getinverse = getinverse)
@@ -20,17 +27,17 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 
-## Write a short comment describing this function
+## this function get the cache of the inversed matrix
 
 cacheSolve <- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'
-        m <- x$getinverse()
-        if(!is.null(m)) {
-            message("getting cached data")
-            return(m)
+        martrixInverse <- x$getinverse()
+        if(!is.null(martrixInverse)) {
+            message("getting inverse matrix")
+            return(martrixInverse)
         }
         data <- x$get()
-        m <- solve(matrix, ...)
-        x$setinverse(m)
-        m
+        martrixInverse <- solve(data, ...)
+        x$setinverse(martrixInverse)
+        martrixInverse
 }
